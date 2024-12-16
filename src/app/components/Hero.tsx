@@ -6,9 +6,9 @@ export default function Hero() {
   return (
     <header className="bg-white mx-auto">
       <div className="text-black text-sm flex flex-col items-center">
-        <div className="bg-[#FBEBB5] flex flex-wrap justify-evenly items-center px-4 py-6 lg:px-[108px]">
+        <div className="bg-[#FBEBB5] flex items-center px-4 py-6 lg:px-[108px]">
           <div className="space-y-4 max-w-md">
-            <h1 className="ml-32 text-3xl md:text-5xl font-medium leading-tight md:leading-[96px] tracking-[px]">
+            <h1 className="ml-28 text-3xl md:text-5xl font-bold leading-tight md:leading-[96px] tracking-[px]">
               Rocket single seater
             </h1>
             <button className="ml-32 text-lg md:text-2xl font-medium leading-6 md:leading-[36px] hover:text-blue-400 underline underline-offset-8">
@@ -20,7 +20,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="max-w-full flex flex-wrap justify-center lg:flex-nowrap gap-10 bg-[#FAF4F4] py-10 px-4 lg:px-[44px] mx-auto">
+        <div className="max-w-full flex flex-wrap justify-center lg:flex-nowrap gap-4 bg-[#FAF4F4] py-10 px-4 lg:px-[55px] mx-auto">
           <img src="/assets/Group 9.png" alt="" className="max-w-1/2" />
           <img src="/assets/Group 8.png" alt="" className="max-w-1/2" />
         </div>

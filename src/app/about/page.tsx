@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import Shoppic from "../../../public/assets/contact.png";
+import Shoppic from "../../../public/assets/blog.png";
 import Pic001 from "../../../public/assets/Rectangle001.png";
 import { FaUser } from "react-icons/fa";
 import { MdDateRange } from "react-icons/md";

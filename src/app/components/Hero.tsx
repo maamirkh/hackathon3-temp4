@@ -6,7 +6,7 @@ export default function Hero() {
   return (
     <header className="bg-white mx-auto">
       <div className="text-black text-sm flex flex-col items-center">
-        <div className="bg-[#FBEBB5] w-[1340px] flex flex-wrap justify-evenly items-center px-4 py-6 lg:px-16">
+        <div className="bg-[#FBEBB5] flex flex-wrap justify-evenly items-center px-4 py-6 lg:px-[108px]">
           <div className="space-y-4 max-w-md">
             <h1 className="ml-32 text-3xl md:text-5xl font-medium leading-tight md:leading-[96px] tracking-[px]">
               Rocket single seater
@@ -15,7 +15,7 @@ export default function Hero() {
               Shop Now
             </button>
           </div>
-          <div className="max-w-2xl">
+          <div className=" sm:max-w-none md:max-w-2xl">
             <img src="/assets/hero-1.png" alt="" className="w-full" />
           </div>
         </div>

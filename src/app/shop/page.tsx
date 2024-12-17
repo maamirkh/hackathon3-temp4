@@ -1,14 +1,32 @@
 
-import Link from "next/link";
 import { BsViewList } from "react-icons/bs";
 import { GiSettingsKnobs } from "react-icons/gi";
 import { BsGridFill } from "react-icons/bs";
-import Image from "next/image"
-import Shoppic from "../../../public/assets/Group 78.png"
-import React from "react"
+import Image from "next/image";
+import Shoppic from "../../../public/assets/Group 78.png";
+import React from "react";
+import pic01 from "../../../public/assets/Mask group.png";
+import pic02 from "../../../public/assets/Mask group (1).png";
+import pic03 from "../../../public/assets/Mask group (2).png";
+import pic04 from "../../../public/assets/Mask group (3).png";
+import pic05 from "../../../public/assets/Mask group (4).png";
+import pic06 from "../../../public/assets/Mask.png";
+import pic07 from "../../../public/assets/Mask group (5).png";
+import pic08 from "../../../public/assets/Mask group (6).png";
+import pic09 from "../../../public/assets/Mask group (7).png";
+import pic10 from "../../../public/assets/Mask group (8).png";
+import pic11 from "../../../public/assets/Mask group (9).png";
+import pic12 from "../../../public/assets/Mask group (10).png";
+import pic13 from "../../../public/assets/Mask group (11).png";
+import pic14 from "../../../public/assets/Mask group (12).png";
+import pic15 from "../../../public/assets/Mask group (13).png";
+import pic16 from "../../../public/assets/Mask group (14).png";
+import pic17 from "../../../public/assets/Group 72.png"
+
+
 export default function Shop () {
     return (
-        <div className="w-[1440px] h-[760px] mx-auto">
+        <div className="max-w-[1440px] h-[760px] mx-auto">
             <div className="">
               <Image src={Shoppic} alt=""/>
               </div>
@@ -30,7 +48,7 @@ export default function Shop () {
                 
               </div>
               <div className="grid grid-cols-4 gap-y-10 mt-10 mx-8">
-                    <div className="space-y-4"><img src="/assets/Mask Group.png" alt="" />
+                    <div className="space-y-4"><Image src={pic01} alt="" />
                     <p className="text-base leading-[24px]">Trenton modular sofa_3</p>
                     <p className="text-[24px] leading-[36px]">Rs. 25,000.00</p>
                     </div>
@@ -98,7 +116,7 @@ export default function Shop () {
 
       {/* Pagination */}
       <div className="flex justify-center my-10">
-        <img src="/assets/Group 72.png" alt="Pagination" />
+        <Image src={pic17} alt="" />
       </div>
 
       {/* Features Section */}

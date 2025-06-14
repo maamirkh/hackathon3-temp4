@@ -1,4 +1,4 @@
-
+import Link from "next/link";
 
 export default function Footer() {
     return (
@@ -18,17 +18,17 @@ export default function Footer() {
                 <div className="flex flex-wrap justify-center gap-10 sm:gap-20 lg:gap-28">
                     <div className="flex flex-col gap-8 ">
                         <p className="text-base font-medium leading-[24px] hover:text-blue-400">Links</p>
-                        <a href="#" className="text-base font-medium leading-[24px] hover:text-blue-400">Home</a>
-                        <a href="#" className="text-base font-medium leading-[24px] hover:text-blue-400">Shop</a>
-                        <a href="#" className="text-base font-medium leading-[24px] hover:text-blue-400">About</a>
-                        <a href="#" className="text-base font-medium leading-[24px] hover:text-blue-400">Contact</a>
+                        <Link href="#" className="text-base font-medium leading-[24px] hover:text-blue-400">Home</Link>
+                        <Link href="#" className="text-base font-medium leading-[24px] hover:text-blue-400">About</Link>
+                        <Link href="#" className="text-base font-medium leading-[24px] hover:text-blue-400">Contact</Link>
+                        <Link href="#" className="text-base font-medium leading-[24px] hover:text-blue-400">Shop</Link>
                     </div>
 
                     <div className="flex flex-col gap-4 ">
                         <p className="text-base font-medium leading-[24px] hover:text-blue-400">Help</p>
-                        <a href="#" className="text-base font-medium leading-[24px] hover:text-blue-400">Payment options</a>
-                        <a href="#" className="text-base font-medium leading-[24px] hover:text-blue-400">Returns</a>
-                        <a href="#" className="text-base font-medium leading-[24px] hover:text-blue-400">Privacy Policy</a>
+                        <Link href="#" className="text-base font-medium leading-[24px] hover:text-blue-400">Payment options</Link>
+                        <Link href="#" className="text-base font-medium leading-[24px] hover:text-blue-400">Returns</Link>
+                        <Link href="#" className="text-base font-medium leading-[24px] hover:text-blue-400">Privacy Policy</Link>
                     </div>
 
                     <div className="flex flex-col gap-4 ">

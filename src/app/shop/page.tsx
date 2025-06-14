@@ -22,6 +22,7 @@ import pic14 from "../../../public/assets/Mask group (12).png";
 import pic15 from "../../../public/assets/Mask group (13).png";
 import pic16 from "../../../public/assets/Mask group (14).png";
 import pic17 from "../../../public/assets/Group 72.png"
+import ProductCards from "../sanityData/page";
 
 
 export default function Shop () {
@@ -53,7 +54,7 @@ export default function Shop () {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 sm:mt-10 mx-2 sm:mx-4">
+      {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-6 sm:mt-10 mx-2 sm:mx-4">
                     <div className="space-y-4"><Image src={pic01} alt="" />
                     <p className="text-base leading-[24px]">Trenton modular sofa_3</p>
                     <p className="text-[24px] leading-[36px]">Rs. 25,000.00</p>
@@ -118,7 +119,8 @@ export default function Shop () {
                     <p>Outdoor sofa set</p>
                     <p className="text-[24px] leading-[36px]">Rs. 244,000.00</p>
                     </div>
-                </div>
+                </div> */}
+                <ProductCards/>
 
       {/* Pagination */}
       <div className="flex justify-center my-10">

@@ -3,7 +3,7 @@ import { FiHeart, FiShoppingCart, FiStar } from "react-icons/fi";
 import { Product } from "../../../types/Product";
 import { urlFor } from "@/sanity/lib/image";
 import Link from "next/link";
-import AddToCartButton from "../components/AddToCartBt/page";
+import AddToCartButton from "../components/addToCartButton";
 
 export default function ProductCards({ product }: { product: Product }) {
   return (

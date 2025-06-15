@@ -3,7 +3,7 @@ import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import React from "react";
 import { Product } from "../../../../types/Product";
-import AddToCartButton from "@/app/components/AddToCartBt/page";
+import AddToCartButton from "@/app/components/addToCartButton";
 import { FiHeart } from "react-icons/fi";
 
 interface Props {

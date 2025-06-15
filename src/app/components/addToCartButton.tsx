@@ -1,8 +1,8 @@
 "use client";
 
 import { FiShoppingCart } from "react-icons/fi";
-import { Product } from "../../../../types/Product";
-import { addToCart } from "../../../../actions/actions";
+import { Product } from "../../../types/Product";
+import { addToCart } from "../../../actions/actions";
 import Swal from "sweetalert2";
 import React from "react";
 
@@ -29,4 +29,3 @@ export default function AddToCartButton({ product }: { product: Product }) {
     </button>
   );
 }
-

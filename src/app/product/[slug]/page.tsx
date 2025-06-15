@@ -1,10 +1,11 @@
-import { client } from "@/sanity/lib/client";
+
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import React from "react";
 import { Product } from "../../../../types/Product";
 import AddToCartButton from "@/app/components/addToCartButton";
 import { FiHeart } from "react-icons/fi";
+import { sanityClient } from "@/sanity/lib/client";
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params; // 👈 await added
@@ -24,7 +25,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     }
   `;
 
-  const product: Product = await client.fetch(query, { slug });
+  const product: Product = await sanityClient.fetch(query, { slug });
 
   if (!product) {
     return (
@@ -101,7 +102,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
 // Static Params Generator
 export async function generateStaticParams() {
   const query = `*[_type == "product"]{ "slug": slug.current }`;
-  const products = await client.fetch(query);
+  const products = await sanityClient.fetch(query);
 
   return products.map((product: { slug: string }) => ({
     slug: product.slug,

@@ -1,3 +1,4 @@
+import { type Metadata } from "next";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
@@ -6,14 +7,12 @@ import { Product } from "../../../../types/Product";
 import AddToCartButton from "@/app/components/addToCartButton";
 import { FiHeart } from "react-icons/fi";
 
-// ✅ Fix 1: Use Next.js's correct type for params
-type ProductPageProps = {
-  params: {
-    slug: string;
-  };
+type Props = {
+  params: { slug: string };
 };
 
-export default async function Productpage({ params }: ProductPageProps) {
+// ✅ This is correct for Next.js 15
+export default async function Page({ params }: Props) {
   const { slug } = params;
 
   const query = `
@@ -113,10 +112,8 @@ export default async function Productpage({ params }: ProductPageProps) {
   );
 }
 
-// ✅ Fix 2: Correct return type for static params
-export async function generateStaticParams(): Promise<
-  { slug: string }[]
-> {
+// ✅ For dynamic route generation
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const query = `*[_type == "product"]{ "slug": slug.current }`;
   const products = await client.fetch(query);
 
@@ -125,8 +122,9 @@ export async function generateStaticParams(): Promise<
   }));
 }
 
-// Optional: ISR for keeping content fresh
+// ✅ Optional: For ISR
 export const revalidate = 60;
+
 
 
 

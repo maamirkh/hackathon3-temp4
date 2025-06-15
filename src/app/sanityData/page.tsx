@@ -1,7 +1,7 @@
 // export default ProductCards;
 import ProductCards from "./productCards";
 import { Product } from "../../../types/Product";
-import { sanityClient } from "@/sanity/lib/client";
+import { client } from '../../sanity/lib/client'
 
 export const revalidate = 60; // Optional: Revalidate every 60 seconds (ISR)
 
@@ -19,7 +19,7 @@ export default async function ProductsPage() {
   category
 }`;
 
-  const products: Product[] = await sanityClient.fetch(query);
+  const products: Product[] = await client.fetch(query);
   console.log("Fetched products from Sanity:", products);
 
 

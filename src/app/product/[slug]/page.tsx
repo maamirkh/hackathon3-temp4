@@ -1,24 +1,16 @@
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
-import { FiHeart } from "react-icons/fi";
-import AddToCartButton from "@/app/components/addToCartButton";
+import React from "react";
 import { Product } from "../../../../types/Product";
-import Swal from "sweetalert2";
-import { addToCart } from "../../../../actions/actions";
+import AddToCartButton from "@/app/components/addToCartButton";
+import { FiHeart } from "react-icons/fi";
 
-interface Props {
-  params: {
-    slug: string;
-  };
-}
+export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params; // 👈 await added
 
-export default async function Productpage({ params }: Props) {
-  const { slug } = params;
-
-  // Fetch product data from Sanity
-  const data = await client.fetch(`
-    *[_type == "product" && slug.current == "${slug}"] {
+  const query = `
+    *[_type == "product" && slug.current == $slug][0] {
       _id,
       name,
       description,
@@ -30,31 +22,21 @@ export default async function Productpage({ params }: Props) {
       "image": image,
       category
     }
-  `)
+  `;
 
-  const product = data[0];
-
-  const handleAddToCart =(e: React.MouseEvent, product: Product) => {
-      e.preventDefault()
-      Swal.fire({
-        position: "top-right",
-        icon: "success",
-        title: `${product.name} added to cart`,
-        showConfirmButton: false,
-        timer: 1000
-  
-      })
-      addToCart(product)
-    }
+  const product: Product = await client.fetch(query, { slug });
 
   if (!product) {
-    return <div className="text-red-600 py-10">Product not found</div>;
+    return (
+      <div className="max-w-4xl mx-auto py-20 text-center text-red-600 text-xl font-semibold">
+        Product not found
+      </div>
+    );
   }
 
   return (
     <div className="max-w-7xl mx-auto px-4 md:px-8 py-10">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
-        {/* Product Image */}
         <div className="relative w-full aspect-square bg-gray-100 rounded-xl overflow-hidden group shadow-md">
           {product.image?.asset ? (
             <Image
@@ -65,9 +47,7 @@ export default async function Productpage({ params }: Props) {
               priority
             />
           ) : (
-            <div className="flex items-center justify-center h-full text-gray-400">
-              No Image
-            </div>
+            <div className="flex items-center justify-center h-full text-gray-400">No Image</div>
           )}
           <div className="absolute top-4 right-4 z-10 flex gap-2">
             {product.discountPercentage !== 0 && (
@@ -81,16 +61,13 @@ export default async function Productpage({ params }: Props) {
           </div>
         </div>
 
-        {/* Product Info */}
         <div className="space-y-6">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900">{product.name}</h1>
-
           <div className="flex flex-wrap gap-2">
             <span className="text-sm bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full">
               Category: {product.category}
             </span>
           </div>
-
           <div className="text-2xl font-bold text-indigo-600 flex items-center gap-3">
             <span>${product.price}</span>
             {product.discountPercentage !== 0 && (
@@ -99,7 +76,6 @@ export default async function Productpage({ params }: Props) {
               </span>
             )}
           </div>
-
           <div className="text-sm font-medium">
             {product.stockLevel === 0 ? (
               <span className="text-red-600">Out of Stock</span>
@@ -107,14 +83,12 @@ export default async function Productpage({ params }: Props) {
               <span className="text-green-600">In Stock</span>
             )}
           </div>
-
           <div>
             <h3 className="font-semibold text-gray-800 mb-2">Description:</h3>
             <p className="text-gray-700 leading-relaxed">
               {product.description || "No description available."}
             </p>
           </div>
-
           <div>
             <AddToCartButton product={product} />
           </div>
@@ -124,9 +98,11 @@ export default async function Productpage({ params }: Props) {
   );
 }
 
+// Static Params Generator
 export async function generateStaticParams() {
   const query = `*[_type == "product"]{ "slug": slug.current }`;
   const products = await client.fetch(query);
+
   return products.map((product: { slug: string }) => ({
     slug: product.slug,
   }));

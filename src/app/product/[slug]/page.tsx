@@ -69,17 +69,14 @@ export default async function Productpage({ params }: Props) {
 
         {/* Product Info */}
         <div className="space-y-6">
-          {/* Title */}
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900">{product.name}</h1>
 
-          {/* Category */}
           <div className="flex flex-wrap gap-2">
             <span className="text-sm bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full">
               Category: {product.category}
             </span>
           </div>
 
-          {/* Price */}
           <div className="text-2xl font-bold text-indigo-600 flex items-center gap-3">
             <span>${product.price}</span>
             {product.discountPercentage !== 0 && (
@@ -89,7 +86,6 @@ export default async function Productpage({ params }: Props) {
             )}
           </div>
 
-          {/* Stock Info */}
           <div className="text-sm font-medium">
             {product.stockLevel === 0 ? (
               <span className="text-red-600">Out of Stock</span>
@@ -98,7 +94,6 @@ export default async function Productpage({ params }: Props) {
             )}
           </div>
 
-          {/* Description */}
           <div>
             <h3 className="font-semibold text-gray-800 mb-2">Description:</h3>
             <p className="text-gray-700 leading-relaxed">
@@ -106,7 +101,6 @@ export default async function Productpage({ params }: Props) {
             </p>
           </div>
 
-          {/* Add to Cart */}
           <div>
             <AddToCartButton product={product} />
           </div>
@@ -115,6 +109,20 @@ export default async function Productpage({ params }: Props) {
     </div>
   );
 }
+
+// ✅ Add this for static generation of dynamic routes
+export async function generateStaticParams() {
+  const query = `*[_type == "product"]{ "slug": slug.current }`;
+  const products = await client.fetch(query);
+
+  return products.map((product: { slug: string }) => ({
+    slug: product.slug,
+  }));
+}
+
+// Optional: If using ISR (Incremental Static Regeneration)
+export const revalidate = 60; // seconds
+
 
 
 

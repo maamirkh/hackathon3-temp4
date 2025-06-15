@@ -1,22 +1,24 @@
-import { type Metadata } from "next";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
-import React from "react";
-import { Product } from "../../../../types/Product";
-import AddToCartButton from "@/app/components/addToCartButton";
 import { FiHeart } from "react-icons/fi";
+import AddToCartButton from "@/app/components/addToCartButton";
+import { Product } from "../../../../types/Product";
+import Swal from "sweetalert2";
+import { addToCart } from "../../../../actions/actions";
 
-type Props = {
-  params: { slug: string };
-};
+interface Props {
+  params: {
+    slug: string;
+  };
+}
 
-// ✅ This is correct for Next.js 15
-export default async function Page({ params }: Props) {
+export default async function Productpage({ params }: Props) {
   const { slug } = params;
 
-  const query = `
-    *[_type == "product" && slug.current == $slug][0] {
+  // Fetch product data from Sanity
+  const data = await client.fetch(`
+    *[_type == "product" && slug.current == "${slug}"] {
       _id,
       name,
       description,
@@ -28,15 +30,25 @@ export default async function Page({ params }: Props) {
       "image": image,
       category
     }
-  `;
-  const product: Product = await client.fetch(query, { slug });
+  `)
+
+  const product = data[0];
+
+  const handleAddToCart =(e: React.MouseEvent, product: Product) => {
+      e.preventDefault()
+      Swal.fire({
+        position: "top-right",
+        icon: "success",
+        title: `${product.name} added to cart`,
+        showConfirmButton: false,
+        timer: 1000
+  
+      })
+      addToCart(product)
+    }
 
   if (!product) {
-    return (
-      <div className="max-w-4xl mx-auto py-20 text-center text-red-600 text-xl font-semibold">
-        Product not found
-      </div>
-    );
+    return <div className="text-red-600 py-10">Product not found</div>;
   }
 
   return (
@@ -112,22 +124,12 @@ export default async function Page({ params }: Props) {
   );
 }
 
-// ✅ For dynamic route generation
-export async function generateStaticParams(): Promise<{ slug: string }[]> {
+export async function generateStaticParams() {
   const query = `*[_type == "product"]{ "slug": slug.current }`;
   const products = await client.fetch(query);
-
   return products.map((product: { slug: string }) => ({
     slug: product.slug,
   }));
 }
 
-// ✅ Optional: For ISR
 export const revalidate = 60;
-
-
-
-
-
-
-

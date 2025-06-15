@@ -6,11 +6,14 @@ import { Product } from "../../../../types/Product";
 import AddToCartButton from "@/app/components/addToCartButton";
 import { FiHeart } from "react-icons/fi";
 
-interface Props {
-  params: { slug: string };
-}
+// ✅ Fix 1: Use Next.js's correct type for params
+type ProductPageProps = {
+  params: {
+    slug: string;
+  };
+};
 
-export default async function Productpage({ params }: Props) {
+export default async function Productpage({ params }: ProductPageProps) {
   const { slug } = params;
 
   const query = `
@@ -110,8 +113,10 @@ export default async function Productpage({ params }: Props) {
   );
 }
 
-// ✅ Add this for static generation of dynamic routes
-export async function generateStaticParams() {
+// ✅ Fix 2: Correct return type for static params
+export async function generateStaticParams(): Promise<
+  { slug: string }[]
+> {
   const query = `*[_type == "product"]{ "slug": slug.current }`;
   const products = await client.fetch(query);
 
@@ -120,8 +125,9 @@ export async function generateStaticParams() {
   }));
 }
 
-// Optional: If using ISR (Incremental Static Regeneration)
-export const revalidate = 60; // seconds
+// Optional: ISR for keeping content fresh
+export const revalidate = 60;
+
 
 
 

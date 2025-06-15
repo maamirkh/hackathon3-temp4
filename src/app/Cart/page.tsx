@@ -6,7 +6,7 @@ import {
   getCartItems,
   removeFromCart,
   updateCartQuantity,
-  clearCart
+
 } from "../../../actions/actions"
 import { urlFor } from "@/sanity/lib/image";
 import Swal from "sweetalert2";

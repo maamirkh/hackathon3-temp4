@@ -1,6 +1,6 @@
 
 'use client'
-import { useRef, useState } from "react"; // Ensure useState is imported
+import { useState } from "react"; // Ensure useState is imported
 import Image from "next/image";
 import Link from "next/link";
 import { TbUserExclamation } from "react-icons/tb";
